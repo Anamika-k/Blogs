@@ -1,0 +1,23 @@
+<!-- app/views/posts/show.html.erb -->
+<div class="post-detail">
+  <h1><%= @post.title %></h1> <!-- Title of the post -->
+  <%= @post.description.body.to_s.html_safe %> <!-- The main content/description of the post -->
+
+  <p class="text-muted">
+    By <%= @post.author.name %> <!-- Author name -->
+    on <%= @post.published_at.strftime("%B %d, %Y") %> <!-- Published date -->
+  </p>
+  
+  <!-- Display image if it exists -->
+  <% if @post.images.attached? %>
+    <div class="post-image">
+      <%= image_tag @post.images.first %> <!-- Display the image -->
+      <p>Width: <%= @post.images.first.metadata['width'] %>px</p> <!-- Image width -->
+      <p>Height: <%= @post.images.first.metadata['height'] %>px</p> <!-- Image height -->
+    </div>
+  <% end %>
+
+</div>
+
+<br>
+<%= link_to 'Back to Category', category_path(@post.category), class: 'btn btn-secondary' %>
