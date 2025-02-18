@@ -6,6 +6,10 @@ ruby "3.0.0"
 gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 gem 'io-console', '0.7.0'
 gem 'image_processing', '~> 1.2'
+gem 'webpacker'
+gem 'tinymce-rails'
+
+
 
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
@@ -74,3 +78,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+

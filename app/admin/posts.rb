@@ -26,7 +26,7 @@ ActiveAdmin.register Post do
   form do |f|
     f.inputs 'Post Details' do
       f.input :title
-      f.input :description, as: :text  # Corrected: Using rich_text_area to render the Trix editor
+      f.input :description, as: :text, input_html: { id: 'post_description' } 
       f.input :published_at, as: :datepicker
       f.input :author, as: :select, collection: Author.all.map { |a| [a.name, a.id] }
       f.input :category, as: :select, collection: Category.all.map { |c| [c.name, c.id] }
@@ -48,7 +48,6 @@ ActiveAdmin.register Post do
           if img.content_type.start_with?('image/') # Check if the file is an image
             image_tag img.variant(resize_to_limit: [300, 300]).processed
           else
-            # Provide a default image or fallback for non-image files
             "Non-image file"
           end
         end.join.html_safe

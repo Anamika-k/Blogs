@@ -1,23 +1,31 @@
 <!-- app/views/posts/show.html.erb -->
-<div class="post-detail">
-  <h1><%= @post.title %></h1> <!-- Title of the post -->
-  <%= @post.description.body.to_s.html_safe %> <!-- The main content/description of the post -->
 
+<div class="post-detail">
+  <!-- Post Title -->
+  <h1 class="display-4"><%= @post.title %></h1>
+
+  <!-- Post Description -->
+  <div class="lead">
+    <%= @post.description.body.to_s.html_safe %>
+  </div>
+
+  <!-- Author and Published Date -->
   <p class="text-muted">
-    By <%= @post.author.name %> <!-- Author name -->
-    on <%= @post.published_at.strftime("%B %d, %Y") %> <!-- Published date -->
+    By <%= @post.author.name %> 
+    on <%= @post.published_at.strftime("%B %d, %Y") %>
   </p>
-  
-  <!-- Display image if it exists -->
+
+  <!-- Post Image if available -->
   <% if @post.images.attached? %>
-    <div class="post-image">
-      <%= image_tag @post.images.first %> <!-- Display the image -->
-      <p>Width: <%= @post.images.first.metadata['width'] %>px</p> <!-- Image width -->
-      <p>Height: <%= @post.images.first.metadata['height'] %>px</p> <!-- Image height -->
+    <div class="post-image mt-4">
+      <%= image_tag @post.images.first.variant(resize_to_limit: [500, 500]).processed, class: 'img-fluid' %>
+      <p>Width: <%= @post.images.first.metadata['width'] %>px</p>
+      <p>Height: <%= @post.images.first.metadata['height'] %>px</p>
     </div>
   <% end %>
-
 </div>
 
-<br>
-<%= link_to 'Back to Category', category_path(@post.category), class: 'btn btn-secondary' %>
+<!-- Back to Category Button -->
+<div class="mt-4">
+  <%= link_to 'Back to Category', category_path(@post.category), class: 'btn btn-secondary' %>
+</div>

@@ -1,0 +1,18 @@
+
+/* Import Bootstrap from node_modules if you're using Sprockets */
+@import "bootstrap/dist/css/bootstrap.min.css"; /* Ensure Bootstrap is installed */
+@import "trix"; /* Import Trix CSS */
+
+/* Your custom styles can go here */
+@import "style"; /* If you have any custom theme.scss files */
+
+/* This is a manifest file that will be compiled into application.css, which will include all the files listed below. */
+
+/* Ensure all files in this directory are compiled */
+/*@import "application_custom_styles"; /* You can create a custom file like _theme.scss */
+
+@import 'tinymce/skins/ui/oxide/skin.min.css';
+@import 'tinymce/skins/content/default/content.min.css';
+
+
+
