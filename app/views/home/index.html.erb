@@ -1,20 +1,22 @@
-<!-- app/views/home/index.html.erb -->
-
-<div class="container">
-  <h1 class="text-center">Latest News</h1>
+<div class="container py-5">
+  <h1 class="text-center mb-5">Latest News</h1>
 
   <!-- Category Sections -->
   <div class="row">
     <% @categories.each do |category| %>
-      <div class="col-md-4">
-        <div class="category-section">
-          <h2 class="category-title"><%= link_to category.name, category_path(category) %></h2>
+      <div class="col-md-4 mb-4">
+        <div class="category-section p-3 border rounded shadow-sm bg-light">
+          <h2 class="category-title mb-3"><%= link_to category.name, category_path(category), class: 'text-decoration-none text-dark' %></h2>
           
           <!-- Posts under each category (limit to 3 posts) -->
           <ul class="list-unstyled">
             <% category.posts.limit(3).each do |post| %>
-              <li>
-                <h5><%= link_to post.title, post_path(post) %></h5>
+              <li class="mb-4">
+                <!-- Check if the post has an image -->
+                <% if post.images.attached? %>
+                  <%= image_tag post.images.first.variant(resize_to_limit: [500, 500]).processed, class: 'img-fluid rounded mb-3', alt: post.title %>
+                <% end %>
+                <h5><%= link_to post.title, post_path(post), class: 'text-decoration-none text-dark' %></h5>
                 <p><%= truncate(post.description.to_plain_text, length: 150) %></p>
               </li>
             <% end %>
@@ -26,13 +28,18 @@
 
   <!-- Latest Posts Section -->
   <div class="row">
-    <h2>Latest Posts</h2>
+    <h2 class="col-12 mb-4">Latest Posts</h2>
     <% @posts.each do |post| %>
-      <div class="col-md-4">
-        <div class="card">
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg border-light">
+          <!-- Check if the post has an image -->
+          <% if post.images.attached? %>
+            <%= image_tag post.images.first.variant(resize_to_limit: [500, 500]).processed, class: 'card-img-top img-fluid', alt: post.title %>
+          <% end %>
+
           <div class="card-body">
-            <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
-            <p class="card-text"><%= truncate(post.description.to_plain_text, length: 100) %></p> <!-- Use to_plain_text here as well -->
+            <h5 class="card-title"><%= link_to post.title, post_path(post), class: 'text-decoration-none text-dark' %></h5>
+            <p class="card-text"><%= truncate(post.description.to_plain_text, length: 120) %></p>
             <%= link_to 'Read More', post_path(post), class: 'btn btn-primary' %>
           </div>
         </div>
