@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>UsnewsProject</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- Linking CSS from the Asset Pipeline -->
-    <%= stylesheet_link_tag 'application', media: 'all' %> <!-- This includes CSS from Sprockets -->
-    <%= stylesheet_link_tag 'style', media: 'all' %> <!-- Add your custom style (style.css) -->
-
-    <!-- Including JavaScript files from the Asset Pipeline -->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> <!-- This includes JavaScript from Sprockets -->
-    <%= javascript_include_tag 'bootstrap', 'data-turbolinks-track': 'reload' %> <!-- Add this line to include bootstrap.js from the Asset Pipeline -->
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
-    <%= yield %> <!-- This is where the content of your views will be rendered -->
+    <%= yield %>
   </body>
 </html>

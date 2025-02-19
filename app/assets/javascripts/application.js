@@ -3,6 +3,7 @@ import "trix";
 
 // Import ActionText, which integrates Trix with Rails
 import "@rails/actiontext";
+import "../stylesheets/application"
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';

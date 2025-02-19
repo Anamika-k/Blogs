@@ -36,7 +36,7 @@ module.exports = function(api) {
         {
           forceAllTransforms: true,
           useBuiltIns: 'entry',
-          corejs: 3,
+          corejs: 3, // Ensure you have core-js@3 installed for polyfills
           modules: false,
           exclude: ['transform-typeof-symbol']
         }
