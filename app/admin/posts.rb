@@ -26,7 +26,7 @@ ActiveAdmin.register Post do
   form do |f|
     f.inputs 'Post Details' do
       f.input :title
-      f.input :description, as: :text, input_html: { id: 'post_description' } 
+      f.input :description, as: :text, input_html: { class: 'tinymce' }
       f.input :published_at, as: :datepicker
       f.input :author, as: :select, collection: Author.all.map { |a| [a.name, a.id] }
       f.input :category, as: :select, collection: Category.all.map { |c| [c.name, c.id] }

@@ -1,10 +1,12 @@
 module.exports = function(api) {
-  var validEnv = ['development', 'test', 'production']
-  var currentEnv = api.env()
-  var isDevelopmentEnv = api.env('development')
-  var isProductionEnv = api.env('production')
-  var isTestEnv = api.env('test')
+  // Define valid environments
+  const validEnv = ['development', 'test', 'production'];
+  const currentEnv = api.env();
+  const isDevelopmentEnv = api.env('development');
+  const isProductionEnv = api.env('production');
+  const isTestEnv = api.env('test');
 
+  // Throw error if NODE_ENV or BABEL_ENV is not valid
   if (!validEnv.includes(currentEnv)) {
     throw new Error(
       'Please specify a valid `NODE_ENV` or ' +
@@ -12,11 +14,13 @@ module.exports = function(api) {
         '"test", and "production". Instead, received: ' +
         JSON.stringify(currentEnv) +
         '.'
-    )
+    );
   }
 
   return {
+    // Presets based on the environment
     presets: [
+      // For testing environments
       isTestEnv && [
         '@babel/preset-env',
         {
@@ -25,6 +29,8 @@ module.exports = function(api) {
           }
         }
       ],
+
+      // For production and development environments
       (isProductionEnv || isDevelopmentEnv) && [
         '@babel/preset-env',
         {
@@ -36,10 +42,17 @@ module.exports = function(api) {
         }
       ]
     ].filter(Boolean),
+
+    // Plugins based on the environment
     plugins: [
+      // Include common plugins
       'babel-plugin-macros',
       '@babel/plugin-syntax-dynamic-import',
+
+      // For testing environments
       isTestEnv && 'babel-plugin-dynamic-import-node',
+
+      // Transformations for specific syntax
       '@babel/plugin-transform-destructuring',
       [
         '@babel/plugin-proposal-class-properties',
@@ -53,6 +66,7 @@ module.exports = function(api) {
           useBuiltIns: true
         }
       ],
+      // Ensure support for private methods
       [
         '@babel/plugin-proposal-private-methods',
         {
@@ -65,6 +79,7 @@ module.exports = function(api) {
           loose: true
         }
       ],
+      // Support async/await transformations
       [
         '@babel/plugin-transform-runtime',
         {
@@ -78,5 +93,5 @@ module.exports = function(api) {
         }
       ]
     ].filter(Boolean)
-  }
-}
+  };
+};

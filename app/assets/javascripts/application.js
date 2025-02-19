@@ -7,8 +7,8 @@ import "@rails/actiontext";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import "bootstrap"
-import "bootstrap.bundle.min.js";
+//import "bootstrap"
+//import "bootstrap.bundle.min.js";
 import tinymce from 'tinymce';
 import 'tinymce/themes/silver';
 import 'tinymce/icons/default';

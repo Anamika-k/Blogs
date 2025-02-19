@@ -11,14 +11,30 @@
 # db/seeds.rb
 
 # Example using HTTParty to fetch data from an API
-response = HTTParty.get('https://api.example.com/articles')
-articles = response.parsed_response
+# Load the Faker gem to generate random data
+require 'faker'
 
-articles.each do |article_data|
-  category = Category.find_or_create_by(name: article_data['category'])
-  Article.create(
-    title: article_data['title'],
-    content: article_data['content'],
-    category: category
+
+# Create Posts by Admin User
+categories = Category.all
+authors = Author.all
+
+5.times do
+  # Generate fake data
+  post = Post.create!(
+    title: Faker::Book.title,
+    description: Faker::Lorem.paragraph,
+    published_at: Faker::Date.between(from: 2.days.ago, to: Date.today),
+    author_id: Author.all.sample.id,  # Randomly assign an author from the existing authors
+    category_id: Category.all.sample.id  # Randomly assign a category from the existing categories
   )
+
+  # Attach a random image using ActiveStorage
+  image_url = "https://picsum.photos/300/300"  # Random image with 300x300 dimensions
+  
+  # Download the image and attach it to the post using ActiveStorage
+  io = URI.open(image_url)  # Open the image from the URL
+  post.images.attach(io: io, filename: "image_#{post.id}.jpg")
 end
+
+puts "Seeded #{Post.count} posts with images attached."

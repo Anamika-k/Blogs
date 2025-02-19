@@ -8,6 +8,7 @@ gem 'io-console', '0.7.0'
 gem 'image_processing', '~> 1.2'
 gem 'webpacker'
 gem 'tinymce-rails'
+gem 'faker'
 
 
 
